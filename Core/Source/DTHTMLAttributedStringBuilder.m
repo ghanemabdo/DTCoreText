@@ -627,6 +627,38 @@
 	
 	[_tagEndHandlers setObject:[videoBlock copy] forKey:@"video"];
 	
+	void (^audioBlock)(void) = ^
+	{
+		if ([_currentTag isKindOfClass:[DTTextAttachmentHTMLElement class]])
+		{
+			DTTextAttachmentHTMLElement *attachmentElement = (DTTextAttachmentHTMLElement *)_currentTag;
+			
+			if ([attachmentElement.textAttachment isKindOfClass:[DTAudioTextAttachment class]])
+			{
+				DTAudioTextAttachment *audioAttachment = (DTAudioTextAttachment *)attachmentElement.textAttachment;
+				
+				// find first child that has a source
+				if (!audioAttachment.contentURL)
+				{
+					for (DTHTMLElement *child in attachmentElement.childNodes)
+					{
+						if ([child.name isEqualToString:@"source"])
+						{
+							NSString *src = [child attributeForKey:@"src"];
+							
+							// content URL
+							audioAttachment.contentURL = [NSURL URLWithString:src relativeToURL:_baseURL];
+							
+							break;
+						}
+					}
+				}
+			}
+		}
+	};
+	
+	[_tagEndHandlers setObject:[audioBlock copy] forKey:@"audio"];
+	
 	void (^styleBlock)(void) = ^
 	{
 		DTCSSStylesheet *localSheet = [(DTStylesheetHTMLElement *)_currentTag stylesheet];

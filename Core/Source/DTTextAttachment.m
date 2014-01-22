@@ -16,6 +16,7 @@
 #import "DTImageTextAttachment.h"
 #import "DTObjectTextAttachment.h"
 #import "DTVideoTextAttachment.h"
+#import "DTAudioTextAttachment.h"
 #import "DTLog.h"
 
 static NSMutableDictionary *_classForTagNameLookup = nil;
@@ -48,6 +49,7 @@ static NSMutableDictionary *_classForTagNameLookup = nil;
 	// register standard tags
 	[DTTextAttachment registerClass:[DTImageTextAttachment class] forTagName:@"img"];
 	[DTTextAttachment registerClass:[DTVideoTextAttachment class] forTagName:@"video"];
+	[DTTextAttachment registerClass:[DTAudioTextAttachment class] forTagName:@"audio"];
 	[DTTextAttachment registerClass:[DTIframeTextAttachment class] forTagName:@"iframe"];
 	[DTTextAttachment registerClass:[DTObjectTextAttachment class] forTagName:@"object"];
 }
