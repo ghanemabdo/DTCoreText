@@ -2,8 +2,8 @@
 //  DTTextAttachmentAudio.h
 //  DTCoreText
 //
-//  Created by Oliver Drobnik on 22.04.13.
-//  Copyright (c) 2013 Drobnik.com. All rights reserved.
+//  Created by Abdurrahman Ghanem on 22.01.14.
+//  Copyright (c) 2014 Drobnik.com. All rights reserved.
 //
 
 #import "DTTextAttachment.h"

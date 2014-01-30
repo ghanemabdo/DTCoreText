@@ -52,6 +52,8 @@ static NSMutableDictionary *_classForTagNameLookup = nil;
 	[DTTextAttachment registerClass:[DTAudioTextAttachment class] forTagName:@"audio"];
 	[DTTextAttachment registerClass:[DTIframeTextAttachment class] forTagName:@"iframe"];
 	[DTTextAttachment registerClass:[DTObjectTextAttachment class] forTagName:@"object"];
+//	[DTTextAttachment registerClass:[DTScriptTextAttachment class] forTagName:@"script"];
+	[DTTextAttachment registerClass:[DTInteractiveContentTextAttachment class] forTagName:@"canvas"];
 }
 
 + (DTTextAttachment *)textAttachmentWithElement:(DTHTMLElement *)element options:(NSDictionary *)options

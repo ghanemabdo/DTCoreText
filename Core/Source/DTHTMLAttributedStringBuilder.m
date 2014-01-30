@@ -659,6 +659,45 @@
 	
 	[_tagEndHandlers setObject:[audioBlock copy] forKey:@"audio"];
 	
+//	void (^scriptFileBlock)(void) = ^
+//	{
+//		if ([_currentTag isKindOfClass:[DTTextAttachmentHTMLElement class]])
+//		{
+//			DTTextAttachmentHTMLElement *attachmentElement = (DTTextAttachmentHTMLElement *)_currentTag;
+//			
+//			if ([attachmentElement.textAttachment isKindOfClass:[DTScriptTextAttachment class]])
+//			{
+//				DTScriptTextAttachment *scriptAttachment = (DTScriptTextAttachment *)attachmentElement.textAttachment;
+//								
+//				// find first child that has a source
+//				if (!scriptAttachment.contentURL)
+//				{
+//					NSString * src = [attachmentElement.attributes objectForKey:@"src"] ;
+//					scriptAttachment.contentURL = [NSURL URLWithString:src relativeToURL:_baseURL] ;
+//				}
+//			}
+//		}
+//	};
+//	
+//	[_tagEndHandlers setObject:[scriptFileBlock copy] forKey:@"script"];
+	
+	void (^interactiveContentBlock)(void) = ^
+	{
+		if ([_currentTag isKindOfClass:[DTTextAttachmentHTMLElement class]])
+		{
+			DTTextAttachmentHTMLElement *attachmentElement = (DTTextAttachmentHTMLElement *)_currentTag;
+			
+			if ([attachmentElement.textAttachment isKindOfClass:[DTInteractiveContentTextAttachment class]])
+			{
+				DTInteractiveContentTextAttachment *interactiveContentAttachment = (DTInteractiveContentTextAttachment *)attachmentElement.textAttachment;
+				
+				[interactiveContentAttachment createInteractiveContentMergedFile] ;
+			}
+		}
+	};
+	
+	[_tagEndHandlers setObject:[interactiveContentBlock copy] forKey:@"canvas"];
+	
 	void (^styleBlock)(void) = ^
 	{
 		DTCSSStylesheet *localSheet = [(DTStylesheetHTMLElement *)_currentTag stylesheet];

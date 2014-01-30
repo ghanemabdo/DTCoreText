@@ -319,6 +319,12 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 						else if (_delegateFlags.delegateSupportsCustomViewsForAttachments)
 						{
 							newCustomAttachmentView = [_delegate attributedTextContentView:self viewForAttachment:attachment frame:frameForSubview];
+							
+							if ( [attachment isKindOfClass:[DTInteractiveContentTextAttachment class]] )
+							{
+								CGRect newFrame = CGRectMake(self.frame.origin.x , self.frame.origin.y , self.frame.size.width , self.superview.frame.size.height) ;
+								self.frame = newFrame ;
+							}
 						}
 						else if (_delegateFlags.delegateSupportsGenericCustomViews)
 						{
